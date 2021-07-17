@@ -50,24 +50,60 @@ public class StringCalculator {
 	}
 	
 	// 책에서 짠 코드
+	/**
+	 * 하나의 메소드는 하나의 기능만 하도록
+	 * public method가 간결해짐.
+	 * */
 	public int add(String text) {
-		if("".equals(text)) {
+		if(isBlank(text)) {
 			return 0;
 		}
-		
-		/**
-		 * 정규표현식에서 . 는 임의의 한 문자를 의미하고, ()는 그룹화를 의미
-		 * .*는 임의의 한 문자가 0이거나 0보다 많음을 의미.
-		 * */
-		
+			return sum(toInts(split(text)));
+	}
+	
+	//빈문자열 또는 null체크
+	private boolean isBlank(String text) {
+		return text==null || text.isEmpty();
+	}
+	
+	//구분자로 분리
+	private String[] split(String text) {
 		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
 		
 		if(m.find()) {
 			String customDelimeter = m.group(1);
-			String[] tokens = m.group(2).split(customDelimeter);
+			return m.group(2).split(customDelimeter);
+		}
+		return text.split(",|:");
+	}
+	
+	//합계
+	private int sum(int[] values) {
+		int sum = 0;
+		
+		for(int value : values) {
+			sum += value;
+		}
+		return sum;
+	}
+	
+	//문자열을 숫자로 변환
+	private int[] toInts(String[] values) {
+		int[] intValues = new int[values.length];
+		
+		for(int i=0; i<intValues.length; i++) {
+			intValues[i] = toPositive(values[i]);
 		}
 		
-		
-		return 0;
+		return intValues;
+	}
+	
+	//음수 입력시 runtime예외 발생
+	public int toPositive(String value) {
+		int number = Integer.parseInt(value);
+		if(number < 0) {
+			throw new RuntimeException();
+		}
+		return number;
 	}
 }

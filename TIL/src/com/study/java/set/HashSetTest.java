@@ -129,7 +129,6 @@ class Person{
 	 * Object클랫의 hashcode는 객체의 주소를 int로 변환해서 반환
 	 * equals()를 오버라이딩하면 hashcode도 오버라이딩해야 합니다.
 	 * equals()의 결과가 true인 두 객체의 해시코드는 같아야 하기 때문.
-	 * 
-	 * 
 	 * */
+	
 }
