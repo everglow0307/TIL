@@ -94,6 +94,8 @@ public class MapAndPeekTest {
 		//그러나 병렬스트림일 때, forEachOrdered를 쓰면 순서가 보장됨.
 		IntStream.range(1, 10).parallel().forEachOrdered(System.out::print);
 		
+		
+		
 	}
 
 }
